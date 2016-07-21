@@ -1,8 +1,14 @@
-FROM ubuntu:trusty
+FROM alpine:3.4
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y exim4
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN apk add --update \
+      exim \
+      && \
+    rm -f /var/cache/apk/*
 
-RUN rm -rf /etc/exim4/*
-COPY configure.default /etc/exim4/exim4.conf
+RUN mkdir /usr/lib/exim/ /var/log/exim 
 
-ENTRYPOINT /usr/sbin/exim4 ${*:--bdf -q30m -v}
+VOLUME ["/var/log/exim"]
+
+ENTRYPOINT ["exim"]
+CMD ["-bdf", "-v", "-q30m"]
