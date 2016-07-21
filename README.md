@@ -42,11 +42,13 @@ For details see [the official documentation](http://www.exim.org/exim-html-curre
 
 ## SMTP TLS Client Authentication
 
-In order to enable TLS authentication for the Exim SMTP client uncomment `tls_certificate` and `tls_privatekey` from your configuration file, mount or add the corresponding certificate and private key files into your container and add `hosts_require_tls = *` to your `remote_smtp` transport configurtion.
+In order to enable TLS authentication for the Exim SMTP client add `tls_certificate`, `tls_privatekey` and `hosts_require_tls = *` to your `remote_smtp` transport configuration in your configuration file, and mount or add the corresponding certificate and private key files into your container.
 
 ~~~~
 remote_smtp:
   driver = smtp
+  tls_certificate = /etc/ssl/exim.crt
+  tls_privatekey = /etc/ssl/exim.pem
   hosts_require_tls = *
 ~~~~
 
