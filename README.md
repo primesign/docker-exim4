@@ -1,8 +1,6 @@
 # Docker Image for Exim4
 
-This is a simple Docker image for Exim4 based on the official [ubuntu:trusty](https://hub.docker.com/r/_/ubuntu/) image.
-
-It uses the official Exim4 default configuraton file `configuration.default` instead of the configuration files provided by ubuntu package.
+This is a simple Docker image for Exim4 based on the official [alpine](https://hub.docker.com/r/_/alpine/) image.
 
 Use it like this in your `docker-compose.yml` file:
 
@@ -14,11 +12,11 @@ version: "2"
       ports:
         - "25:25"
       volumes:
-        - "./conf/exim4.conf:/etc/exim4/exim4.conf:ro"
+        - "./conf/exim4.conf:/etc/exim/exim.conf:ro"
         - "./conf/ssl/exim.crt:/etc/ssl/exim.crt:ro"
         - "./conf/ssl/exim.pem:/etc/ssl/exim.pem:ro"
-        - "/var/opt/smtp/spool:/var/spool/exim4/"
-        - "/var/opt/smtp/log:/var/log/exim4/"
+        - "/var/opt/smtp/spool:/var/spool/exim"
+        - "/var/opt/smtp/log:/var/log/exim"
 ~~~~
 
 ## Smart Host Configuration
