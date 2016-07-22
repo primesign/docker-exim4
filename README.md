@@ -51,3 +51,5 @@ remote_smtp:
 ~~~~
 
 For details see [9. Configuring an Exim client to use TLS](http://www.exim.org/exim-html-current/doc/html/spec_html/ch-encrypted_smtp_connections_using_tlsssl.html) in the official Exim4 documentation.
+
+When exim is compiled with GnuTLS the TLS client authentication only works if the server specifies a list of accepted issuer certificates (see this [bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=591261) entry) - Exchange/Office365 does not. Therefore, we switched to Alpine since it's exim version is compiled with OpenSSL.
